@@ -77,7 +77,8 @@ class GameScene(QGraphicsScene):
 
     def killSnake(self):
         if self.snake.x not in range(0, self.width) or \
-           self.snake.y not in range(0, self.height):
+           self.snake.y not in range(0, self.height) or\
+           self.snake.pos() in self.snake.positions[2:]:
             self.time = round(time.time() - self.time, 3)
             self.statistic_list.addItem('Game finished: {} s. Score: {}'\
                                .format(self.time, self.score))
