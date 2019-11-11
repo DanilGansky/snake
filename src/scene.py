@@ -53,12 +53,16 @@ class GameScene(QGraphicsScene):
         self.timer_snake.stop()
 
     def drawGrid(self):
+        self.addRect(0, 0, 500, 500, 
+                     QPen(QColor('white'), 1),
+                     QBrush(QColor('white')))
+
         for row in range(0, self.height + 20, 20):
             for column in range(0, self.width + 20, 20):
                 self.addLine(0, row, self.width, row, 
-                             QPen(QColor('white'), 1))
+                             QPen(QColor('black'), 1))
                 self.addLine(column, 0, column, self.height,
-                             QPen(QColor('white'), 1))
+                             QPen(QColor('black'), 1))
 
     def createSnake(self):
         self.snake = Snake(0.0, 0.0)
@@ -93,7 +97,7 @@ class GameScene(QGraphicsScene):
             random_y = abs(round(randint(0, self.height) / 20) * 20 - 20)
             food_item = QRectF(random_x, random_y, 20, 20)
 
-            while food_item in self.food_items:
+            while food_item in self.food_items or food_item in self.snake.positions:
                 random_x = abs(round(randint(0, self.width) / 20) * 20 - 20)
                 random_y = abs(round(randint(0, self.height) / 20) * 20 - 20)
                 food_item = QRectF(random_x, random_y, 20, 20)
